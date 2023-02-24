@@ -22,7 +22,7 @@ export default class App extends Component {
 
     if (existed) {
       alert(`${name} is already in contact`);
-      return;
+      return false;
     }
 
     const newContact = {
@@ -34,6 +34,8 @@ export default class App extends Component {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
+
+    return true;
   };
 
   deleteContact = id => {
