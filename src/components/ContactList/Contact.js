@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { Button } from './ContactList.styled';
-import { deleteContact } from '../../redux/contactSlice';
+import { deleteContact } from '../../redux/operations';
 
 function Contact({ id, name, number }) {
   const dispatch = useDispatch();
 
   const removeContact = () => {
-    dispatch(deleteContact({ id }));
+    dispatch(deleteContact(id));
   };
 
   return (

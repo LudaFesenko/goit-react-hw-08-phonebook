@@ -3,23 +3,16 @@ import { useSelector } from 'react-redux';
 
 import { List, ListItem } from './ContactList.styled';
 import Contact from './Contact';
-
-const getFilteredContacts = (contacts, filter) =>
-  contacts.filter(contact =>
-    contact.name.toLowerCase().trim().includes(filter.toLowerCase().trim())
-  );
+import { selectFilteredContacts } from 'redux/selectors';
 
 function ContactList() {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.filter.filter);
-
-  const filteredContacts = getFilteredContacts(contacts, filter);
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
     <List>
-      {filteredContacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, phone }) => (
         <ListItem key={id}>
-          <Contact id={id} name={name} number={number} />
+          <Contact id={id} name={name} number={phone} />
         </ListItem>
       ))}
     </List>
