@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-import { Form, Input, Button } from './ContactForm.styled';
-import { addContact } from 'redux/operations';
-import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/contacts-operations';
+import { selectContacts } from 'redux/contacts/contacts-selectors';
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -44,27 +48,37 @@ function ContactForm() {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input
-        onChange={onChange}
-        type="text"
-        name="name"
-        value={name}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-      />
-      <Input
-        onChange={onChange}
-        type="tel"
-        name="number"
-        value={number}
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-      />
-      <Button type="submit">Add contact</Button>
-    </Form>
+    <Card>
+      <CardContent>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={3}>
+            <TextField
+              onChange={onChange}
+              type="text"
+              name="name"
+              value={name}
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              size="small"
+            />
+            <TextField
+              onChange={onChange}
+              type="tel"
+              name="number"
+              value={number}
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              size="small"
+            />
+            <Button type="submit" variant="contained">
+              Add contact
+            </Button>
+          </Stack>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
 
